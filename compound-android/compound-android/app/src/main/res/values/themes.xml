@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Compose draws the whole UI; this theme only sets the window colour shown while the app starts. -->
+    <style name="Theme.Compound" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:windowBackground">@color/paper</item>
+    </style>
+</resources>

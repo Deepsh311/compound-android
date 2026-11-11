@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <uses-permission android:name="android.permission.READ_CALENDAR" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.health.READ_EXERCISE" />
+
+    <!-- Lets the app check whether Health Connect is installed on Android 13 and older. -->
+    <queries>
+        <package android:name="com.google.android.apps.healthdata" />
+    </queries>
+
+    <application
+        android:name=".CompoundApp"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:roundIcon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Compound">
+
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:windowSoftInputMode="adjustResize">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- Health Connect opens this screen when someone asks why Compound wants workout data. -->
+        <activity
+            android:name=".HealthRationaleActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="androidx.health.ACTION_SHOW_PERMISSIONS_RATIONALE" />
+            </intent-filter>
+        </activity>
+
+        <!-- Android 14+ uses this alias for the same explanation. -->
+        <activity-alias
+            android:name="ViewPermissionUsageActivity"
+            android:exported="true"
+            android:permission="android.permission.START_VIEW_PERMISSION_USAGE"
+            android:targetActivity=".HealthRationaleActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW_PERMISSION_USAGE" />
+                <category android:name="android.intent.category.HEALTH_PERMISSIONS" />
+            </intent-filter>
+        </activity-alias>
+    </application>
+</manifest>
